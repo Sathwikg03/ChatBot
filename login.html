@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>LOGIN</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Add your custom CSS here */
+    .txt_field {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .txt_field input[type="password"] {
+      padding-right: 40px; /* Make space for the eye button */
+    }
+
+    .eye-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      opacity: 0; /* Initially hidden */
+      visibility: hidden; /* Initially hidden */
+      transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+    }
+
+    .eye-button.show {
+      opacity: 1; /* Make visible */
+      visibility: visible; /* Make visible */
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <h1>Login</h1>
+    <form id="loginForm" method="post" action="login.php">
+      <div class="txt_field">
+        <input type="text" name="username" required>
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" name="password" id="password" required oninput="toggleEyeButton()">
+        <button type="button" class="eye-button" onclick="togglePassword()">
+          <i class="fas fa-eye" id="eyeIcon"></i>
+        </button>
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="pass">Forgot Password?</div>
+      <input type="submit" value="Login">
+      <div class="signup_link">
+        Not a member? <a href="signup.html">Signup</a>
+      </div>
+    </form>
+  </div>
+  <script>
+    function togglePassword() {
+      var passwordField = document.getElementById('password');
+      var eyeIcon = document.getElementById('eyeIcon');
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordField.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    }
+
+    function toggleEyeButton() {
+      var passwordField = document.getElementById('password');
+      var eyeButton = document.querySelector('.eye-button');
+      if (passwordField.value.length > 0) {
+        eyeButton.classList.add('show');
+      } else {
+        eyeButton.classList.remove('show');
+      }
+    }
+  </script>
+</body>
+</html>
